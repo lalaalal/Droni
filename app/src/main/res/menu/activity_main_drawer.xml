@@ -12,6 +12,11 @@
             android:id="@+id/nav_community"
             android:title="@string/menu_community" />
     </group>
+    <item android:title="@string/menu_community">
+        <menu>
+
+        </menu>
+    </item>
 
     <item android:title="Communicate">
         <menu>

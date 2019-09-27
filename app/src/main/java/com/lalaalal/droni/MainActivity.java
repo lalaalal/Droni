@@ -1,5 +1,6 @@
 package com.lalaalal.droni;
 
+import android.content.Intent;
 import android.os.Bundle;
 
 import com.google.android.material.floatingactionbutton.FloatingActionButton;
@@ -13,6 +14,7 @@ import androidx.navigation.ui.AppBarConfiguration;
 import androidx.navigation.ui.NavigationUI;
 
 import com.google.android.material.navigation.NavigationView;
+import com.lalaalal.droni.ui.LoginDialog;
 
 import androidx.drawerlayout.widget.DrawerLayout;
 
@@ -46,6 +48,8 @@ public class MainActivity extends AppCompatActivity {
 
     private void initActionBar() {
         Toolbar toolbar = findViewById(R.id.toolbar);
+        final LoginSessionHandler loginSession = LoginSessionHandler.getLoginSession(this);
+        loginSession.logOut();
         setSupportActionBar(toolbar);
 
         ImageButton expandMenuBtn = findViewById(R.id.expand_menu_btn);
@@ -54,6 +58,20 @@ public class MainActivity extends AppCompatActivity {
             public void onClick(View view) {
                 View navView = findViewById(R.id.nav_view);
                 drawer.openDrawer(navView);
+            }
+        });
+
+        ImageButton userBtn = findViewById(R.id.user_btn);
+        userBtn.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                if (!loginSession.isLoggedIn()) {
+                    LoginDialog loginDialog = new LoginDialog();
+                    loginDialog.show(getSupportFragmentManager(), "Login Dialog");
+                } else {
+                    Intent intent = new Intent(MainActivity.this, UserPageActivity.class);
+                    startActivity(intent);
+                }
             }
         });
     }
