@@ -37,9 +37,13 @@ public class LoginSessionHandler {
     public void logOut() {
         editor.clear();
         editor.putBoolean(LOGIN_SESSION, false);
-        editor.putString(SESSION_ID, null);
+        editor.putString(SESSION_ID, "");
         editor.commit();
     }
 
-
+    public String getSessionId() throws LoginException {
+        if (!isLoggedIn())
+            throw new LoginException(LoginException.NOT_LOGGED_IN);
+        return sharedPreferences.getString(SESSION_ID, "");
+    }
 }

@@ -32,13 +32,15 @@ public class UserLogin {
 
     public boolean requestLogin() {
         DroniRequest request = new DroniRequest("TEXT", "LOGIN", userId + ":" + userPw);
-        DroniResponse response = new DroniResponse();
         try {
-            Thread thread = new Thread(new DroniClient(request, response));
+            DroniClient droniClient = new DroniClient(request);
+            Thread thread = new Thread(droniClient);
             thread.start();
             thread.join();
-            return response.stringData.equals("SUCCEED!");
 
+            DroniResponse response = droniClient.getResponse();
+            String responseString = response.stringData.get(0);
+            return responseString.equals("SUCCEED!");
         } catch (InterruptedException e) {
             return false;
         }

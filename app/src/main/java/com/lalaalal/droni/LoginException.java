@@ -3,7 +3,8 @@ package com.lalaalal.droni;
 import androidx.annotation.Nullable;
 
 public class LoginException extends Exception {
-    public static int EMPTY_FIELD;
+    public static final int EMPTY_FIELD = 1;
+    public static final int NOT_LOGGED_IN = 2;
 
     private int errNo;
 

@@ -16,9 +16,8 @@ public class DroniClient implements Runnable {
     private final DroniRequest request;
     private DroniResponse response;
 
-    public DroniClient(DroniRequest request, DroniResponse response) {
+    public DroniClient(DroniRequest request) {
         this.request = request;
-        this.response = response;
     }
 
     @Override
@@ -42,7 +41,13 @@ public class DroniClient implements Runnable {
     }
 
     private void receiveText() {
-        response.type = in.nextLine();
-        response.stringData = in.nextLine();
+        String type = in.nextLine();
+        String responseString = in.nextLine();
+
+        response = new DroniResponse(type, responseString);
+    }
+
+    public DroniResponse getResponse() {
+        return response;
     }
 }
