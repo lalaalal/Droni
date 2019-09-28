@@ -1,5 +1,4 @@
 <resources>
-
     <!-- Base application theme. -->
     <style name="AppTheme" parent="Theme.AppCompat.Light.NoActionBar">
         <!-- Customize your theme here. -->
@@ -7,15 +6,10 @@
         <item name="colorPrimaryDark">@color/colorPrimaryDark</item>
         <item name="colorAccent">@color/colorAccent</item>
 <!--        <item name="android:windowTranslucentStatus">true</item>-->
-        <item name="android:navigationBarColor">@color/colorPrimary</item>
-        <item name="actionOverflowButtonStyle">@style/MyActionOverflowButton</item>
-        <item name="android:statusBarColor">@android:color/white</item>
+        <item name="android:navigationBarColor">@color/colorPageBackground</item>
+        <item name="android:statusBarColor">@color/colorToolbarBackground</item>
         <item name="android:windowLightStatusBar">true</item>
         <item name="android:windowLightNavigationBar">true</item>
-    </style>
-
-    <style name="MyActionOverflowButton" parent="Widget.AppCompat.ActionButton.Overflow">
-        <item name="android:src">@drawable/ic_more_black</item>
     </style>
 
 </resources>

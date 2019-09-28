@@ -21,8 +21,6 @@ import com.lalaalal.droni.client.UserLogin;
 public class LoginDialog extends DialogFragment
         implements DialogInterface.OnClickListener {
 
-    private static final String LOGIN_SESSION = "LOGIN_SESSION";
-
     private View root;
 
     private String getUserId() throws LoginException {
@@ -70,6 +68,5 @@ public class LoginDialog extends DialogFragment
         } catch (LoginException e) {
             Toast.makeText(getContext(), e.getMessage(), Toast.LENGTH_SHORT).show();
         }
-
     }
 }
