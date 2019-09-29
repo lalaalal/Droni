@@ -38,6 +38,11 @@ public class AirFieldFragment extends Fragment {
                              ViewGroup container, Bundle savedInstanceState) {
         View root = inflater.inflate(R.layout.fragment_airfield, container, false);
 
+        sharedPreferencesHandler = SharedPreferencesHandler.getSharedPreferences(getContext());
+        if (!sharedPreferencesHandler.isLoggedIn()) {
+            Toast.makeText(getContext(), "먼저 로그인을 해 주세요", Toast.LENGTH_SHORT).show();
+        }
+
         fpvTableLayout = root.findViewById(R.id.fpv_table);
         airfieldRadioGroup = root.findViewById(R.id.airfield_rg);
         gwangNaruRadioButton = root.findViewById(R.id.gwangnaru_rb);
@@ -49,8 +54,6 @@ public class AirFieldFragment extends Fragment {
         setFpvChannelEditText = root.findViewById(R.id.set_fpv_channel_et);
         setFpvButton = root.findViewById(R.id.set_fpv_btn);
         cancelFpvButton = root.findViewById(R.id.cancel_fpv_btn);
-
-        sharedPreferencesHandler = SharedPreferencesHandler.getSharedPreferences(getContext());
 
         initFpvTableLayout();
         setRadioButtonsOnClickListener();
@@ -86,6 +89,8 @@ public class AirFieldFragment extends Fragment {
                 try {
                     if (setFpvBandEditText.getText().length() == 0 || setFpvChannelEditText.getText().length() == 0)
                         throw new DroniException("사용할 대역폭을 입력해 주세요");
+                    if (!sharedPreferencesHandler.isLoggedIn())
+                        throw new DroniException("로그인을 해 주세요");
                     int band = Integer.parseInt(setFpvBandEditText.getText().toString()) - 1;
                     int channel = Integer.parseInt(setFpvChannelEditText.getText().toString()) - 1;
                     if (!AirFieldData.inRange(band, channel))
@@ -93,6 +98,8 @@ public class AirFieldFragment extends Fragment {
                     setFpvStatusAt(band , channel, SUB_COMMAND_USE);
                     sharedPreferencesHandler.useFpv(band, channel);
                     loadFpvTable(fieldData.getFieldName());
+                    setFpvChannelEditText.setEnabled(false);
+                    setFpvBandEditText.setEnabled(false);
                 } catch (DroniException e) {
                     Toast.makeText(getContext(), e.getMessage(), Toast.LENGTH_SHORT).show();
                 }
@@ -105,11 +112,15 @@ public class AirFieldFragment extends Fragment {
                 try {
                     if (!sharedPreferencesHandler.isFpvUsing())
                         throw new DroniException("사용 중인 대역폭이 없습니다");
+                    if (!sharedPreferencesHandler.isLoggedIn())
+                        throw new DroniException("로그인을 해 주세요");
                     int band = sharedPreferencesHandler.getFpvBand();
                     int channel = sharedPreferencesHandler.getFpvChannel();
                     setFpvStatusAt(band , channel, SUB_COMMAND_NOT_USE);
                     sharedPreferencesHandler.cancelFpv();
                     loadFpvTable(fieldData.getFieldName());
+                    setFpvChannelEditText.setEnabled(true);
+                    setFpvBandEditText.setEnabled(true);
                 } catch (DroniException e) {
                     Toast.makeText(getContext(), e.getMessage(), Toast.LENGTH_SHORT).show();
                 }

@@ -23,6 +23,7 @@ public class QRScanActivity extends AppCompatActivity {
         if(result != null) {
             if(result.getContents() == null) {
                 Toast.makeText(this, "Cancelled", Toast.LENGTH_LONG).show();
+                finish();
             } else {
                 Toast.makeText(this, "Scanned: " + result.getContents(), Toast.LENGTH_SHORT).show();
                 Intent intent = new Intent(getApplicationContext(), UserPageActivity.class);

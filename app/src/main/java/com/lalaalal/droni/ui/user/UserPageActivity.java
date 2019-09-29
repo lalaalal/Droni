@@ -51,6 +51,17 @@ public class UserPageActivity extends AppCompatActivity {
                 startActivity(intent);
             }
         });
+
+        Button logoutButton = findViewById(R.id.logout_btn);
+        logoutButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                SharedPreferencesHandler loginSessionHandler = SharedPreferencesHandler.getSharedPreferences(getApplicationContext());
+                loginSessionHandler.logOut();
+
+                finish();
+            }
+        });
     }
 
     private void setQrImage(String id) {

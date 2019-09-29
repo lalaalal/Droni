@@ -19,13 +19,13 @@
 
     <com.google.android.material.card.MaterialCardView
         android:layout_width="match_parent"
-        android:layout_height="wrap_content">
+        android:layout_height="wrap_content"
+        android:layout_marginBottom="@dimen/card_view_interval">
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:orientation="horizontal"
-            android:padding="@dimen/card_view_padding"
-            android:layout_marginBottom="@dimen/card_view_interval">
+            android:padding="@dimen/card_view_padding">
             <ImageView
                 android:id="@+id/user_qr_btn"
                 android:layout_width="wrap_content"
@@ -48,5 +48,11 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:text="스캔하기"/>
+
+    <Button
+        android:id="@+id/logout_btn"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="로그아웃"/>
 
 </LinearLayout>

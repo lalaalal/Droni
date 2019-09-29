@@ -33,6 +33,7 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:hint="아이디를 입력하세요"
+                android:singleLine="true"
                 android:layout_marginBottom="@dimen/sign_up_et_interval"/>
             <EditText
                 android:id="@+id/sign_up_pw_et"
@@ -40,30 +41,35 @@
                 android:layout_height="wrap_content"
                 android:inputType="textPassword"
                 android:hint="비밀번호를 입력하세요"
+                android:singleLine="true"
                 android:layout_marginBottom="@dimen/sign_up_et_interval"/>
             <EditText
                 android:id="@+id/sign_up_name_et"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:hint="이름을 입력하세요"
+                android:singleLine="true"
                 android:layout_marginBottom="@dimen/sign_up_et_interval"/>
             <EditText
                 android:id="@+id/sign_up_career_et"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:hint="전공을 입력하세요"
+                android:singleLine="true"
                 android:layout_marginBottom="@dimen/sign_up_et_interval"/>
             <EditText
                 android:id="@+id/sign_up_phone_et"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:hint="전화번호를 입력하세요"
+                android:singleLine="true"
                 android:layout_marginBottom="@dimen/sign_up_et_interval"/>
             <EditText
                 android:id="@+id/sign_up_drone_et"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:hint="드론 정보를 입력하세요"/>
+                android:hint="드론 정보를 입력하세요"
+                android:singleLine="true"/>
         </LinearLayout>
     </com.google.android.material.card.MaterialCardView>
 

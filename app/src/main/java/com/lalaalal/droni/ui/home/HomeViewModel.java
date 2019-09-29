@@ -3,7 +3,9 @@ package com.lalaalal.droni.ui.home;
 import androidx.lifecycle.LiveData;
 import androidx.lifecycle.MutableLiveData;
 import androidx.lifecycle.ViewModel;
+import com.lalaalal.droni.CallbackExecutor;
 import com.lalaalal.droni.WeatherProvider;
+import com.lalaalal.droni.ui.LoadingDialog;
 import org.json.JSONException;
 import org.json.JSONObject;
 
@@ -21,20 +23,32 @@ public class HomeViewModel extends ViewModel {
         kpIndex = new MutableLiveData<>();
     }
 
-    void setWeatherData(WeatherProvider weatherProvider) throws JSONException {
+    void setWeatherData(final LoadingDialog loadingDialog) {
+        WeatherProvider weatherProvider = new WeatherProvider(loadingDialog) {
+            @Override
+            public void callBack() {
+                loadingDialog.hideDialog();
 
-        JSONObject weatherData = new JSONObject(weatherProvider.getWeatherData());
-        JSONObject kpIndexData = new JSONObject(weatherProvider.getKpIndexData());
+                try {
+                    JSONObject weatherData = new JSONObject(getWeatherData());
+                    JSONObject kpIndexData = new JSONObject(getKpIndexData());
 
-        String status = weatherData.getJSONArray("weather").getJSONObject(0).getString("icon");
-        int temp = weatherData.getJSONObject("main").getInt("temp") - 273;
-        int wind = weatherData.getJSONObject("wind").getInt("speed");
-        int kp = kpIndexData.getJSONObject("kindex").getInt("currentP");
+                    String status = weatherData.getJSONArray("weather").getJSONObject(0).getString("icon");
+                    int temp = weatherData.getJSONObject("main").getInt("temp") - 273;
+                    int wind = weatherData.getJSONObject("wind").getInt("speed");
+                    int kp = kpIndexData.getJSONObject("kindex").getInt("currentP");
 
-        weatherStatus.setValue(status);
-        temperature.setValue(temp);
-        windSpeed.setValue(wind);
-        kpIndex.setValue(kp);
+                    weatherStatus.postValue(status);
+                    temperature.postValue(temp);
+                    windSpeed.postValue(wind);
+                    kpIndex.postValue(kp);
+                } catch (JSONException e) {
+                    e.printStackTrace();
+                }
+            }
+        };
+        CallbackExecutor callbackExecutor = new CallbackExecutor();
+        callbackExecutor.execute(weatherProvider);
     }
 
     LiveData<String> getWeatherStatus() {

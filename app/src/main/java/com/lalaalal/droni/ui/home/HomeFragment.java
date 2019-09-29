@@ -6,15 +6,12 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ImageView;
 import android.widget.TextView;
-import android.widget.Toast;
 import androidx.annotation.NonNull;
 import androidx.fragment.app.Fragment;
 import androidx.lifecycle.Observer;
 import androidx.lifecycle.ViewModelProviders;
-import com.lalaalal.droni.DroniException;
 import com.lalaalal.droni.R;
-import com.lalaalal.droni.WeatherProvider;
-import org.json.JSONException;
+import com.lalaalal.droni.ui.LoadingDialog;
 
 import java.lang.reflect.Field;
 
@@ -30,16 +27,13 @@ public class HomeFragment extends Fragment {
     public View onCreateView(@NonNull LayoutInflater inflater,
                              ViewGroup container, Bundle savedInstanceState) {
         View root = inflater.inflate(R.layout.fragment_home, container, false);
-        try {
-            homeViewModel = ViewModelProviders.of(this).get(HomeViewModel.class);
-            homeViewModel.setWeatherData(getValidWeatherProvider());
 
-            initLayout(root);
-        } catch (DroniException e) {
-            Toast.makeText(getContext(), e.getMessage(), Toast.LENGTH_SHORT).show();
-        } catch (JSONException e) {
-            Toast.makeText(getContext(), "Wrong Data Received", Toast.LENGTH_SHORT).show();
-        }
+        LoadingDialog loadingDialog = new LoadingDialog(getActivity());
+        loadingDialog.showDialog();
+        homeViewModel = ViewModelProviders.of(this).get(HomeViewModel.class);
+        homeViewModel.setWeatherData(loadingDialog);
+
+        initLayout(root);
 
         return root;
     }
@@ -54,14 +48,6 @@ public class HomeFragment extends Fragment {
         }
     }
 
-    private WeatherProvider getValidWeatherProvider() throws DroniException {
-        WeatherProvider weatherProvider = new WeatherProvider();
-
-        if (weatherProvider.getKpIndexData() == null || weatherProvider.getWeatherData() == null)
-            throw new DroniException(DroniException.NO_RESPONSE);
-        return weatherProvider;
-    }
-
     private void initLayout(View root) {
         weatherStatus = root.findViewById(R.id.weather_status_iv);
         windSpeed = root.findViewById(R.id.wind_speed_tv);
@@ -71,7 +57,7 @@ public class HomeFragment extends Fragment {
         homeViewModel.getWeatherStatus().observe(this, new Observer<String>() {
             @Override
             public void onChanged(String s) {
-                int resId = getResId(s, R.drawable.class);
+                int resId = getResId("w" + s, R.drawable.class);
                 if (resId != -1)
                     weatherStatus.setImageResource(resId);
             }
