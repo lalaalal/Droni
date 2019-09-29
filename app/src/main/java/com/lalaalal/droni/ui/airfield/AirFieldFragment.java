@@ -14,6 +14,7 @@ import com.lalaalal.droni.SharedPreferencesHandler;
 import com.lalaalal.droni.client.DroniClient;
 import com.lalaalal.droni.client.DroniRequest;
 import com.lalaalal.droni.client.DroniResponse;
+import com.lalaalal.droni.ui.LoginDialog;
 
 public class AirFieldFragment extends Fragment {
     private static final String COMMAND_AIRFIELD = "AIRFIELD";
@@ -40,6 +41,8 @@ public class AirFieldFragment extends Fragment {
 
         sharedPreferencesHandler = SharedPreferencesHandler.getSharedPreferences(getContext());
         if (!sharedPreferencesHandler.isLoggedIn()) {
+            LoginDialog loginDialog = new LoginDialog();
+            loginDialog.show(getActivity().getSupportFragmentManager(), "Login Dialog");
             Toast.makeText(getContext(), "먼저 로그인을 해 주세요", Toast.LENGTH_SHORT).show();
         }
 
@@ -59,6 +62,16 @@ public class AirFieldFragment extends Fragment {
         setRadioButtonsOnClickListener();
         setFpvButtonOnClickListener();
 
+        if (sharedPreferencesHandler.isFpvUsing()) {
+            String band = Integer.toString(sharedPreferencesHandler.getFpvBand());
+            String channel = Integer.toString(sharedPreferencesHandler.getFpvChannel());
+
+            setFpvBandEditText.setText(band);
+            setFpvBandEditText.setEnabled(false);
+            setFpvChannelEditText.setText(channel);
+            setFpvChannelEditText.setEnabled(false);
+            setFpvButton.setEnabled(false);
+        }
 
         String fieldName = getSelectedAirFieldName(root);
         loadFpvTable(fieldName);
@@ -100,6 +113,7 @@ public class AirFieldFragment extends Fragment {
                     loadFpvTable(fieldData.getFieldName());
                     setFpvChannelEditText.setEnabled(false);
                     setFpvBandEditText.setEnabled(false);
+                    setFpvButton.setEnabled(false);
                 } catch (DroniException e) {
                     Toast.makeText(getContext(), e.getMessage(), Toast.LENGTH_SHORT).show();
                 }
@@ -121,6 +135,7 @@ public class AirFieldFragment extends Fragment {
                     loadFpvTable(fieldData.getFieldName());
                     setFpvChannelEditText.setEnabled(true);
                     setFpvBandEditText.setEnabled(true);
+                    setFpvButton.setEnabled(true);
                 } catch (DroniException e) {
                     Toast.makeText(getContext(), e.getMessage(), Toast.LENGTH_SHORT).show();
                 }

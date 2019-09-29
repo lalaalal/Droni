@@ -6,7 +6,7 @@
         android:id="@+id/loading_iv"
         android:layout_width="120dp"
         android:layout_height="120dp"
-        android:src="@android:drawable/arrow_down_float"
+        android:src="@drawable/loading"
         android:layout_gravity="center"/>
 
 </LinearLayout>

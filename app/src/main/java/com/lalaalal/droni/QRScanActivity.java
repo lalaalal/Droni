@@ -22,10 +22,10 @@ public class QRScanActivity extends AppCompatActivity {
         IntentResult result = IntentIntegrator.parseActivityResult(requestCode, resultCode, data);
         if(result != null) {
             if(result.getContents() == null) {
-                Toast.makeText(this, "Cancelled", Toast.LENGTH_LONG).show();
+                Toast.makeText(this, "취소됨", Toast.LENGTH_LONG).show();
                 finish();
             } else {
-                Toast.makeText(this, "Scanned: " + result.getContents(), Toast.LENGTH_SHORT).show();
+                Toast.makeText(this, "ID : " + result.getContents(), Toast.LENGTH_SHORT).show();
                 Intent intent = new Intent(getApplicationContext(), UserPageActivity.class);
                 intent.putExtra("ID", result.getContents());
                 finish();

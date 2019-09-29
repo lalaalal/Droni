@@ -32,7 +32,6 @@ public class MainActivity extends AppCompatActivity {
     private void initActionBar() {
         Toolbar toolbar = findViewById(R.id.toolbar);
         final SharedPreferencesHandler loginSession = SharedPreferencesHandler.getSharedPreferences(this);
-        loginSession.logOut();
         setSupportActionBar(toolbar);
 
         ImageButton expandMenuBtn = findViewById(R.id.expand_menu_btn);
@@ -64,7 +63,7 @@ public class MainActivity extends AppCompatActivity {
         NavigationView navigationView = findViewById(R.id.nav_view);
 
         mAppBarConfiguration = new AppBarConfiguration.Builder(
-                R.id.nav_home, R.id.nav_share, R.id.nav_send)
+                R.id.nav_home, R.id.nav_intro, R.id.nav_rule, R.id.nav_kp_alarm)
                 .setDrawerLayout(drawer)
                 .build();
         NavController navController = Navigation.findNavController(this, R.id.nav_host_fragment);
@@ -76,5 +75,10 @@ public class MainActivity extends AppCompatActivity {
         NavController navController = Navigation.findNavController(this, R.id.nav_host_fragment);
         return NavigationUI.navigateUp(navController, mAppBarConfiguration)
                 || super.onSupportNavigateUp();
+    }
+
+    @Override
+    public void onBackPressed() {
+        finish();
     }
 }

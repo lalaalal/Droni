@@ -4,6 +4,7 @@ import androidx.lifecycle.LiveData;
 import androidx.lifecycle.MutableLiveData;
 import androidx.lifecycle.ViewModel;
 import com.lalaalal.droni.CallbackExecutor;
+import com.lalaalal.droni.DroniException;
 import com.lalaalal.droni.WeatherProvider;
 import com.lalaalal.droni.ui.LoadingDialog;
 import org.json.JSONException;
@@ -24,12 +25,15 @@ public class HomeViewModel extends ViewModel {
     }
 
     void setWeatherData(final LoadingDialog loadingDialog) {
-        WeatherProvider weatherProvider = new WeatherProvider(loadingDialog) {
+        WeatherProvider weatherProvider = new WeatherProvider() {
             @Override
             public void callBack() {
                 loadingDialog.hideDialog();
 
                 try {
+                    if (getWeatherData() == null || getKpIndexData() == null)
+                        throw new DroniException(DroniException.NO_RESPONSE);
+
                     JSONObject weatherData = new JSONObject(getWeatherData());
                     JSONObject kpIndexData = new JSONObject(getKpIndexData());
 
@@ -43,7 +47,9 @@ public class HomeViewModel extends ViewModel {
                     windSpeed.postValue(wind);
                     kpIndex.postValue(kp);
                 } catch (JSONException e) {
-                    e.printStackTrace();
+
+                } catch (DroniException e) {
+
                 }
             }
         };

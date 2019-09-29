@@ -1,83 +1,105 @@
 <?xml version="1.0" encoding="utf-8"?>
+
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:orientation="vertical"
     android:layout_width="match_parent"
-    android:layout_height="match_parent"
-    android:padding="@dimen/fragment_padding">
-
-    <com.google.android.material.card.MaterialCardView
+    android:layout_height="match_parent">
+    <com.google.android.material.appbar.AppBarLayout
+        android:id="@+id/toolbar_layout"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_marginBottom="@dimen/card_view_interval"
-        android:padding="@dimen/card_view_padding">
-        <TextView
+        android:layout_height="wrap_content" >
+        <androidx.appcompat.widget.Toolbar
+            android:orientation="vertical"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:padding="@dimen/title_text_padding"
-            android:textSize="@dimen/title_text_size"
-            android:text="회원 가입"/>
-    </com.google.android.material.card.MaterialCardView>
+            android:background="@color/colorToolbarBackground">
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal"
+                android:gravity="start"
+                android:layout_margin="15dp">
+                <TextView
+                    android:id="@+id/user_id_tv"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="회원 가입"
+                    android:textColor="@android:color/black"
+                    android:textSize="20sp"/>
+            </LinearLayout>
 
-    <com.google.android.material.card.MaterialCardView
+        </androidx.appcompat.widget.Toolbar>
+    </com.google.android.material.appbar.AppBarLayout>
+
+    <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+        android:orientation="vertical"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_marginBottom="@dimen/card_view_interval">
-        <LinearLayout
+        android:layout_height="match_parent"
+        android:padding="@dimen/fragment_padding">
+
+        <com.google.android.material.card.MaterialCardView
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:padding="@dimen/card_view_padding"
-            android:orientation="vertical">
+            android:layout_marginBottom="@dimen/card_view_interval">
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:padding="@dimen/card_view_padding"
+                android:orientation="vertical">
 
-            <EditText
-                android:id="@+id/sign_up_id_et"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:hint="아이디를 입력하세요"
-                android:singleLine="true"
-                android:layout_marginBottom="@dimen/sign_up_et_interval"/>
-            <EditText
-                android:id="@+id/sign_up_pw_et"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:inputType="textPassword"
-                android:hint="비밀번호를 입력하세요"
-                android:singleLine="true"
-                android:layout_marginBottom="@dimen/sign_up_et_interval"/>
-            <EditText
-                android:id="@+id/sign_up_name_et"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:hint="이름을 입력하세요"
-                android:singleLine="true"
-                android:layout_marginBottom="@dimen/sign_up_et_interval"/>
-            <EditText
-                android:id="@+id/sign_up_career_et"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:hint="전공을 입력하세요"
-                android:singleLine="true"
-                android:layout_marginBottom="@dimen/sign_up_et_interval"/>
-            <EditText
-                android:id="@+id/sign_up_phone_et"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:hint="전화번호를 입력하세요"
-                android:singleLine="true"
-                android:layout_marginBottom="@dimen/sign_up_et_interval"/>
-            <EditText
-                android:id="@+id/sign_up_drone_et"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:hint="드론 정보를 입력하세요"
-                android:singleLine="true"/>
-        </LinearLayout>
-    </com.google.android.material.card.MaterialCardView>
+                <EditText
+                    android:id="@+id/sign_up_id_et"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:hint="아이디를 입력하세요"
+                    android:singleLine="true"
+                    android:layout_marginBottom="@dimen/sign_up_et_interval"/>
+                <EditText
+                    android:id="@+id/sign_up_pw_et"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:inputType="textPassword"
+                    android:hint="비밀번호를 입력하세요"
+                    android:singleLine="true"
+                    android:layout_marginBottom="@dimen/sign_up_et_interval"/>
+                <EditText
+                    android:id="@+id/sign_up_name_et"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:hint="이름을 입력하세요"
+                    android:singleLine="true"
+                    android:layout_marginBottom="@dimen/sign_up_et_interval"/>
+                <EditText
+                    android:id="@+id/sign_up_career_et"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:hint="전공을 입력하세요"
+                    android:singleLine="true"
+                    android:layout_marginBottom="@dimen/sign_up_et_interval"/>
+                <EditText
+                    android:id="@+id/sign_up_phone_et"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:hint="전화번호를 입력하세요"
+                    android:singleLine="true"
+                    android:layout_marginBottom="@dimen/sign_up_et_interval"/>
+                <EditText
+                    android:id="@+id/sign_up_drone_et"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:hint="드론 정보를 입력하세요"
+                    android:singleLine="true"/>
+            </LinearLayout>
+        </com.google.android.material.card.MaterialCardView>
 
-    <Button
-        android:id="@+id/sign_up_btn"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_gravity="end"
-        android:text="가입"/>
+        <Button
+            android:id="@+id/sign_up_btn"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="end"
+            android:text="가입"/>
+
+    </LinearLayout>
 
 </LinearLayout>
+

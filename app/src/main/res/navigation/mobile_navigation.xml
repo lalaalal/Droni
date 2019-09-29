@@ -23,14 +23,20 @@
         android:label="@string/menu_community" />
 
     <fragment
-        android:id="@+id/nav_share"
-        android:name="com.lalaalal.droni.ui.share.ShareFragment"
-        android:label="@string/menu_share"
-        tools:layout="@layout/fragment_share" />
+        android:id="@+id/nav_intro"
+        android:name="com.lalaalal.droni.ui.cartoon.IntroFragment"
+        android:label="@string/menu_intro"
+        tools:layout="@layout/fragment_cartoon" />
 
     <fragment
-        android:id="@+id/nav_send"
-        android:name="com.lalaalal.droni.ui.send.SendFragment"
-        android:label="@string/menu_send"
-        tools:layout="@layout/fragment_send" />
+        android:id="@+id/nav_rule"
+        android:name="com.lalaalal.droni.ui.cartoon.RuleFragment"
+        android:label="@string/menu_rule"
+        tools:layout="@layout/fragment_cartoon" />
+
+    <fragment
+        android:id="@+id/nav_kp_alarm"
+        android:name="com.lalaalal.droni.ui.cartoon.KpAlarmFragment"
+        android:label="@string/menu_kp_alarm"
+        tools:layout="@layout/fragment_cartoon" />
 </navigation>
