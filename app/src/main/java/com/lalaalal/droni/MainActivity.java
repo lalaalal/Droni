@@ -2,26 +2,19 @@ package com.lalaalal.droni;
 
 import android.content.Intent;
 import android.os.Bundle;
-
-import com.google.android.material.floatingactionbutton.FloatingActionButton;
-import com.google.android.material.snackbar.Snackbar;
-
 import android.view.View;
-
+import android.widget.ImageButton;
+import androidx.appcompat.app.AppCompatActivity;
+import androidx.appcompat.widget.Toolbar;
+import androidx.drawerlayout.widget.DrawerLayout;
 import androidx.navigation.NavController;
 import androidx.navigation.Navigation;
 import androidx.navigation.ui.AppBarConfiguration;
 import androidx.navigation.ui.NavigationUI;
-
+import com.google.android.material.floatingactionbutton.FloatingActionButton;
 import com.google.android.material.navigation.NavigationView;
+import com.google.android.material.snackbar.Snackbar;
 import com.lalaalal.droni.ui.LoginDialog;
-
-import androidx.drawerlayout.widget.DrawerLayout;
-
-import androidx.appcompat.app.AppCompatActivity;
-import androidx.appcompat.widget.Toolbar;
-
-import android.widget.ImageButton;
 import com.lalaalal.droni.ui.user.UserPageActivity;
 
 public class MainActivity extends AppCompatActivity {
@@ -46,6 +39,8 @@ public class MainActivity extends AppCompatActivity {
         initActionBar();
         initNavigation();
     }
+
+
 
     private void initActionBar() {
         Toolbar toolbar = findViewById(R.id.toolbar);
@@ -82,7 +77,7 @@ public class MainActivity extends AppCompatActivity {
         NavigationView navigationView = findViewById(R.id.nav_view);
 
         mAppBarConfiguration = new AppBarConfiguration.Builder(
-                R.id.nav_home, R.id.nav_weather, R.id.nav_share, R.id.nav_send)
+                R.id.nav_home, R.id.nav_share, R.id.nav_send)
                 .setDrawerLayout(drawer)
                 .build();
         NavController navController = Navigation.findNavController(this, R.id.nav_host_fragment);

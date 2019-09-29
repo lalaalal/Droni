@@ -31,8 +31,8 @@ public class UserLogin {
     }
 
     public boolean requestLogin() {
-        DroniRequest request = new DroniRequest("TEXT", "LOGIN", userId + ":" + userPw);
         try {
+            DroniRequest request = new DroniRequest("TEXT", "LOGIN", userId + ":" + userPw);
             DroniClient droniClient = new DroniClient(request);
             Thread thread = new Thread(droniClient);
             thread.start();
