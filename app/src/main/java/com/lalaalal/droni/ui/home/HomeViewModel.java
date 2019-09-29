@@ -1,6 +1,5 @@
 package com.lalaalal.droni.ui.home;
 
-import android.util.Log;
 import androidx.lifecycle.LiveData;
 import androidx.lifecycle.MutableLiveData;
 import androidx.lifecycle.ViewModel;
@@ -20,18 +19,10 @@ public class HomeViewModel extends ViewModel {
         temperature = new MutableLiveData<>();
         windSpeed = new MutableLiveData<>();
         kpIndex = new MutableLiveData<>();
-
-        try {
-            setWeatherData();
-        } catch (Exception e) {
-            e.printStackTrace();
-        }
     }
 
-    private void setWeatherData() throws JSONException {
-        WeatherProvider weatherProvider = new WeatherProvider();
+    void setWeatherData(WeatherProvider weatherProvider) throws JSONException {
 
-        Log.d("weather", weatherProvider.getWeatherData());
         JSONObject weatherData = new JSONObject(weatherProvider.getWeatherData());
         JSONObject kpIndexData = new JSONObject(weatherProvider.getKpIndexData());
 
@@ -46,19 +37,19 @@ public class HomeViewModel extends ViewModel {
         kpIndex.setValue(kp);
     }
 
-    public LiveData<String> getWeatherStatus() {
+    LiveData<String> getWeatherStatus() {
         return weatherStatus;
     }
 
-    public LiveData<Integer> getTemperature() {
+    LiveData<Integer> getTemperature() {
         return temperature;
     }
 
-    public LiveData<Integer> getWindSpeed() {
+    LiveData<Integer> getWindSpeed() {
         return windSpeed;
     }
 
-    public LiveData<Integer> getKpIndex() {
+    LiveData<Integer> getKpIndex() {
         return kpIndex;
     }
 }

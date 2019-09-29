@@ -1,5 +1,7 @@
 package com.lalaalal.droni.client;
 
+import com.lalaalal.droni.DroniException;
+
 import java.math.BigInteger;
 import java.security.MessageDigest;
 
@@ -30,7 +32,7 @@ public class UserLogin {
         userPw = MD5Hash(pw);
     }
 
-    public boolean requestLogin() {
+    public boolean requestLogin() throws DroniException {
         try {
             DroniRequest request = new DroniRequest("TEXT", "LOGIN", userId + ":" + userPw);
             DroniClient droniClient = new DroniClient(request);
@@ -39,6 +41,8 @@ public class UserLogin {
             thread.join();
 
             DroniResponse response = droniClient.getResponse();
+            if (response == null)
+                throw new DroniException(DroniException.NO_RESPONSE);
             String responseString = response.stringData.get(0);
             return responseString.equals("SUCCEED!");
         } catch (InterruptedException e) {

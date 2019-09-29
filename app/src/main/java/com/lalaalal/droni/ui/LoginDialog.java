@@ -8,11 +8,10 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.widget.EditText;
 import android.widget.Toast;
-
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.fragment.app.DialogFragment;
-
+import com.lalaalal.droni.DroniException;
 import com.lalaalal.droni.LoginException;
 import com.lalaalal.droni.LoginSessionHandler;
 import com.lalaalal.droni.R;
@@ -66,6 +65,8 @@ public class LoginDialog extends DialogFragment
                 Toast.makeText(getContext(), "실패 ㅠ", Toast.LENGTH_SHORT).show();
             }
         } catch (LoginException e) {
+            Toast.makeText(getContext(), e.getMessage(), Toast.LENGTH_SHORT).show();
+        } catch (DroniException e) {
             Toast.makeText(getContext(), e.getMessage(), Toast.LENGTH_SHORT).show();
         }
     }

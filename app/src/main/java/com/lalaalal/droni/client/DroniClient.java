@@ -23,7 +23,8 @@ public class DroniClient implements Runnable {
     @Override
     public void run() {
         try {
-            server = new Socket("192.168.55.2", SERVER_PORT);
+            server = new Socket("192.168.55.3", SERVER_PORT);
+
             in = new Scanner(server.getInputStream());
             out = new PrintWriter(server.getOutputStream(), true);
 
