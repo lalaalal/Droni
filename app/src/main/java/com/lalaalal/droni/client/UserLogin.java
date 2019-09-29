@@ -44,7 +44,7 @@ public class UserLogin {
             if (response == null)
                 throw new DroniException(DroniException.NO_RESPONSE);
             String responseString = response.stringData.get(0);
-            return responseString.equals("SUCCEED!");
+            return responseString.equals(DroniResponse.RESPONSE_SUCCEED);
         } catch (InterruptedException e) {
             return false;
         }

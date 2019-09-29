@@ -44,7 +44,7 @@ public class MainActivity extends AppCompatActivity {
 
     private void initActionBar() {
         Toolbar toolbar = findViewById(R.id.toolbar);
-        final LoginSessionHandler loginSession = LoginSessionHandler.getLoginSession(this);
+        final SharedPreferencesHandler loginSession = SharedPreferencesHandler.getSharedPreferences(this);
         loginSession.logOut();
         setSupportActionBar(toolbar);
 
@@ -65,7 +65,7 @@ public class MainActivity extends AppCompatActivity {
                     LoginDialog loginDialog = new LoginDialog();
                     loginDialog.show(getSupportFragmentManager(), "Login Dialog");
                 } else {
-                    Intent intent = new Intent(MainActivity.this, UserPageActivity.class);
+                    Intent intent = new Intent(getApplicationContext(), UserPageActivity.class);
                     startActivity(intent);
                 }
             }

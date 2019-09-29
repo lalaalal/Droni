@@ -3,6 +3,7 @@ package com.lalaalal.droni.ui;
 import android.app.AlertDialog;
 import android.app.Dialog;
 import android.content.DialogInterface;
+import android.content.Intent;
 import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -11,14 +12,10 @@ import android.widget.Toast;
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.fragment.app.DialogFragment;
-import com.lalaalal.droni.DroniException;
-import com.lalaalal.droni.LoginException;
-import com.lalaalal.droni.LoginSessionHandler;
-import com.lalaalal.droni.R;
+import com.lalaalal.droni.*;
 import com.lalaalal.droni.client.UserLogin;
 
-public class LoginDialog extends DialogFragment
-        implements DialogInterface.OnClickListener {
+public class LoginDialog extends DialogFragment {
 
     private View root;
 
@@ -48,15 +45,26 @@ public class LoginDialog extends DialogFragment
         root = inflater.inflate(R.layout.dialog_login, null);
         builder.setView(root);
 
-        builder.setPositiveButton(R.string.login, this);
+        builder.setPositiveButton(R.string.login, new DialogInterface.OnClickListener() {
+            @Override
+            public void onClick(DialogInterface dialog, int which) {
+                LoginProgress();
+            }
+        });
+        builder.setNegativeButton("가입", new DialogInterface.OnClickListener() {
+            @Override
+            public void onClick(DialogInterface dialog, int which) {
+                Intent intent = new Intent(getContext(), SignUpActivity.class);
+                startActivity(intent);
+            }
+        });
 
         return builder.create();
     }
 
-    @Override
-    public void onClick(DialogInterface dialogInterface, int i) {
+    private void LoginProgress() {
         try {
-            LoginSessionHandler loginSession = LoginSessionHandler.getLoginSession(getContext());
+            SharedPreferencesHandler loginSession = SharedPreferencesHandler.getSharedPreferences(getContext());
             UserLogin userLogin = new UserLogin(getUserId(), getUserPw());
             if (userLogin.requestLogin()) {
                 loginSession.logIn(getUserId());

@@ -6,7 +6,7 @@ import java.net.Socket;
 import java.util.Scanner;
 
 public class DroniClient implements Runnable {
-    private static final String SERVER_ADDRESS = "192.168.232.1";
+    private static final String SERVER_ADDRESS = "192.168.55.2";
     private static final int SERVER_PORT = 51101;
 
     private Socket server;
@@ -23,7 +23,7 @@ public class DroniClient implements Runnable {
     @Override
     public void run() {
         try {
-            server = new Socket("192.168.55.3", SERVER_PORT);
+            server = new Socket(SERVER_ADDRESS, SERVER_PORT);
 
             in = new Scanner(server.getInputStream());
             out = new PrintWriter(server.getOutputStream(), true);

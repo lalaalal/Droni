@@ -2,11 +2,13 @@ package com.lalaalal.droni.client;
 
 import java.util.ArrayList;
 import java.util.Arrays;
-import java.util.List;
 
 public class DroniResponse {
     public static final int TYPE_TEXT = 1;
     public static final int TYPE_FILE = 2;
+
+    public static final String RESPONSE_SUCCEED = "SUCCEED!";
+    public static final String RESPONSE_FAILED = "FAILED!";
 
     public String type;
     public ArrayList<String> stringData;

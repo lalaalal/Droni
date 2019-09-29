@@ -26,7 +26,7 @@ public class HomeViewModel extends ViewModel {
         JSONObject weatherData = new JSONObject(weatherProvider.getWeatherData());
         JSONObject kpIndexData = new JSONObject(weatherProvider.getKpIndexData());
 
-        String status = weatherData.getJSONArray("weather").getJSONObject(0).getString("main");
+        String status = weatherData.getJSONArray("weather").getJSONObject(0).getString("icon");
         int temp = weatherData.getJSONObject("main").getInt("temp") - 273;
         int wind = weatherData.getJSONObject("wind").getInt("speed");
         int kp = kpIndexData.getJSONObject("kindex").getInt("currentP");

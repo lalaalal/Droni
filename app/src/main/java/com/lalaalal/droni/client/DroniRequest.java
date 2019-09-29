@@ -1,10 +1,8 @@
 package com.lalaalal.droni.client;
 
-import java.util.ArrayList;
-
 public class DroniRequest {
-    public static final int TYPE_TEXT = 1;
-    public static final int TYPE_FILE = 2;
+    public static final String TYPE_TEXT = "TEXT";
+    public static final String TYPE_FILE = "FILE";
 
     public String type = null;
     public String command = null;

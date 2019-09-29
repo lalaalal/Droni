@@ -2,36 +2,123 @@
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:orientation="horizontal">
+    android:orientation="vertical"
+    android:padding="@dimen/fragment_padding">
 
     <androidx.cardview.widget.CardView
-        android:layout_margin="10dp"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:focusable="true"
         android:clickable="true"
-        android:foreground="?attr/selectableItemBackground">
+        android:foreground="?attr/selectableItemBackground"
+        android:layout_marginBottom="@dimen/card_view_interval">
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:orientation="vertical">
-            <TextView
-                android:id="@+id/weather_status_tv"
+            android:orientation="horizontal"
+            android:padding="@dimen/card_view_padding">
+            <ImageView
+                android:id="@+id/weather_status_iv"
                 android:layout_width="wrap_content"
-                android:layout_height="wrap_content" />
-            <TextView
-                android:id="@+id/wind_speed_tv"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"/>
+            <LinearLayout
                 android:layout_width="wrap_content"
-                android:layout_height="wrap_content" />
-            <TextView
-                android:id="@+id/temperature_tv"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content" />
-            <TextView
-                android:id="@+id/kp_index_tv"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content" />
+                android:layout_height="wrap_content"
+                android:orientation="vertical"
+                android:layout_weight="1">
+                <TextView
+                    android:id="@+id/wind_speed_tv"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:textSize="@dimen/weather_text_size"
+                    android:padding="@dimen/text_padding"/>
+                <TextView
+                    android:id="@+id/temperature_tv"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:textSize="@dimen/weather_text_size"
+                    android:padding="@dimen/text_padding"/>
+                <TextView
+                    android:id="@+id/kp_index_tv"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:textSize="@dimen/weather_text_size"
+                    android:padding="@dimen/text_padding"/>
+            </LinearLayout>
         </LinearLayout>
+        
     </androidx.cardview.widget.CardView>
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginBottom="@dimen/card_view_interval"
+        android:focusable="true"
+        android:clickable="true">
+        <androidx.cardview.widget.CardView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:focusable="true"
+            android:clickable="true"
+            android:foreground="?attr/selectableItemBackground"
+            android:layout_marginEnd="@dimen/card_view_interval">
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="커뮤니티"
+                android:layout_gravity="center"
+                android:padding="@dimen/home_menu_padding"/>
+        </androidx.cardview.widget.CardView>
+        <androidx.cardview.widget.CardView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:focusable="true"
+            android:clickable="true"
+            android:foreground="?attr/selectableItemBackground">
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center"
+                android:padding="@dimen/home_menu_padding"
+                android:text="공지사항"/>
+        </androidx.cardview.widget.CardView>
+    </LinearLayout>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginBottom="@dimen/card_view_interval">
+        <androidx.cardview.widget.CardView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:focusable="true"
+            android:clickable="true"
+            android:foreground="?attr/selectableItemBackground"
+            android:layout_marginEnd="@dimen/card_view_interval">
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text=" 규정  "
+                android:layout_gravity="center"
+                android:padding="@dimen/home_menu_padding"/>
+        </androidx.cardview.widget.CardView>
+        <androidx.cardview.widget.CardView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:focusable="true"
+            android:clickable="true"
+            android:foreground="?attr/selectableItemBackground">
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center"
+                android:padding="@dimen/home_menu_padding"
+                android:text="이벤트"/>
+        </androidx.cardview.widget.CardView>
+    </LinearLayout>
 
 </LinearLayout>

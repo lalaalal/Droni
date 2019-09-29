@@ -8,6 +8,10 @@
             android:id="@+id/nav_home"
             android:icon="@drawable/ic_home_black"
             android:title="@string/menu_home" />
+        <item
+            android:id="@+id/nav_airfield"
+            android:icon="@drawable/ic_airfield_black"
+            android:title="@string/menu_airfield" />
     </group>
 
     <item android:title="Communicate">
