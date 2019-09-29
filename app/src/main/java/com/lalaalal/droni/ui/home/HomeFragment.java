@@ -10,9 +10,6 @@ import androidx.fragment.app.Fragment;
 import androidx.lifecycle.Observer;
 import androidx.lifecycle.ViewModelProviders;
 import com.lalaalal.droni.R;
-import com.lalaalal.droni.WeatherProvider;
-import org.json.JSONException;
-import org.json.JSONObject;
 
 public class HomeFragment extends Fragment {
 
@@ -59,22 +56,5 @@ public class HomeFragment extends Fragment {
         });
 
         return root;
-    }
-
-    private void setWeatherData() throws JSONException {
-        WeatherProvider weatherProvider = new WeatherProvider();
-
-        JSONObject weatherData = new JSONObject(weatherProvider.getWeatherData());
-        JSONObject kpIndexData = new JSONObject(weatherProvider.getKpIndexData());
-
-        String status = weatherData.getJSONArray("weather").getJSONObject(0).getString("main");
-        int temp = weatherData.getJSONObject("main").getInt("temp") - 273;
-        int wind = weatherData.getJSONObject("wind").getInt("speed");
-        int kp = kpIndexData.getJSONObject("kindex").getInt("currentP");
-
-        windSpeed.setText(wind);
-        temperature.setText(temp);
-        weatherStatus.setText(status);
-        kpIndex.setText(kp);
     }
 }
