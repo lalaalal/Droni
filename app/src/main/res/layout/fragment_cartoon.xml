@@ -4,4 +4,8 @@
     android:layout_height="match_parent"
     android:background="@drawable/rule">
 
+    <include
+            layout="@layout/kp5"
+            android:visibility="invisible"/>
+
 </LinearLayout>

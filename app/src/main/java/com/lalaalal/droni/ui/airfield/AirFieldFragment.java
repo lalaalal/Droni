@@ -24,10 +24,9 @@ public class AirFieldFragment extends Fragment {
     private static final String SUB_COMMAND_DJI_USE = "SET_DJI_USE";
     private static final String SUB_COMMAND_DJI_NOT_USE = "SET_DJI_NOT_USE";
 
-    private static final String GWANG_NARU_FIELD_NAME = "광나루";
-    private static final String SIN_SEONG_FIELD_NAME = "신정";
-
     private View root;
+    private View gwangNaruData;
+    private View sinJeonData;
 
     private TableLayout fpvTableLayout;
     private RadioGroup airfieldRadioGroup;
@@ -40,6 +39,8 @@ public class AirFieldFragment extends Fragment {
     private Button useDjiDronButton;
     private TextView djiDroneUsingTextView;
 
+    private LinearLayout airFieldData;
+
     private AirFieldData fieldData;
 
     private SharedPreferencesHandler sharedPreferencesHandler;
@@ -47,6 +48,8 @@ public class AirFieldFragment extends Fragment {
     public View onCreateView(@NonNull LayoutInflater inflater,
                              ViewGroup container, Bundle savedInstanceState) {
         root = inflater.inflate(R.layout.fragment_airfield, container, false);
+        gwangNaruData = inflater.inflate(R.layout.gwangnaru, container, false);
+        sinJeonData = inflater.inflate(R.layout.sinjeong, container, false);
 
         sharedPreferencesHandler = SharedPreferencesHandler.getSharedPreferences(getContext());
         if (!sharedPreferencesHandler.isLoggedIn()) {
@@ -54,6 +57,8 @@ public class AirFieldFragment extends Fragment {
             loginDialog.show(getActivity().getSupportFragmentManager(), "Login Dialog");
             Toast.makeText(getContext(), "먼저 로그인을 해 주세요", Toast.LENGTH_SHORT).show();
         }
+
+        airFieldData = root.findViewById(R.id.airfield_info);
 
         fpvTableLayout = root.findViewById(R.id.fpv_table);
         airfieldRadioGroup = root.findViewById(R.id.airfield_rg);
@@ -75,12 +80,12 @@ public class AirFieldFragment extends Fragment {
         setFpvButtonOnClickListener();
 
         if (sharedPreferencesHandler.isFpvUsing()) {
-            String band = Integer.toString(sharedPreferencesHandler.getFpvBand());
-            String channel = Integer.toString(sharedPreferencesHandler.getFpvChannel());
+            String band = Integer.toString(sharedPreferencesHandler.getFpvBand() + 1);
+            String channel = Integer.toString(sharedPreferencesHandler.getFpvChannel() + 1);
 
-            setFpvBandEditText.setText(band + 1);
+            setFpvBandEditText.setText(band);
             setFpvBandEditText.setEnabled(false);
-            setFpvChannelEditText.setText(channel + 1);
+            setFpvChannelEditText.setText(channel);
             setFpvChannelEditText.setEnabled(false);
             setFpvButton.setEnabled(false);
         }
@@ -90,6 +95,7 @@ public class AirFieldFragment extends Fragment {
 
         String fieldName = getSelectedAirFieldName();
         loadFpvTable(fieldName);
+        airFieldData.addView(gwangNaruData);
 
         return root;
     }
@@ -99,12 +105,16 @@ public class AirFieldFragment extends Fragment {
             @Override
             public void onClick(View v) {
                 loadFpvTable(gwangNaruRadioButton.getText().toString());
+                airFieldData.removeAllViews();
+                airFieldData.addView(gwangNaruData);
             }
         });
         sinJeongRadioButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 loadFpvTable(sinJeongRadioButton.getText().toString());
+                airFieldData.removeAllViews();
+                airFieldData.addView(sinJeonData);
             }
         });
     }
@@ -279,6 +289,12 @@ public class AirFieldFragment extends Fragment {
                 }
             }
             String s = "DJI : " + fieldData.getDjiDrone();
+            if (fieldData.getDjiDrone() > 0) {
+                djiDroneUsingTextView.setTextColor(Color.RED);
+            } else {
+                djiDroneUsingTextView.setTextColor(Color.GREEN);
+            }
+
             djiDroneUsingTextView.setText(s);
         } catch (DroniException e) {
             Toast.makeText(getContext(), e.getMessage(), Toast.LENGTH_SHORT).show();

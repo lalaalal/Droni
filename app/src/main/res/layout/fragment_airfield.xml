@@ -1,98 +1,110 @@
 <?xml version="1.0" encoding="utf-8"?>
-<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
     android:orientation="vertical"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:padding="@dimen/fragment_padding">
 
-    <com.google.android.material.card.MaterialCardView
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_marginBottom="@dimen/card_view_interval">
-        <LinearLayout
+    <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:orientation="vertical"
-            android:padding="@dimen/card_view_padding">
-            <RadioGroup
-                android:id="@+id/airfield_rg"
+            android:orientation="vertical">
+        <com.google.android.material.card.MaterialCardView
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:orientation="horizontal">
-                <RadioButton
-                    android:id="@+id/gwangnaru_rb"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_weight="1"
-                    android:text="광나루" />
-                <RadioButton
-                    android:id="@+id/sinjeong_rb"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_weight="1"
-                    android:text="신정" />
-            </RadioGroup>
-
-            <TableLayout
-                android:id="@+id/fpv_table"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_marginBottom="@dimen/card_view_interval"
-                android:stretchColumns="*" />
-            <TextView
-                    android:id="@+id/dji_use"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:padding="@dimen/text_padding"/>
-        </LinearLayout>
-    </com.google.android.material.card.MaterialCardView>
-
-    <com.google.android.material.card.MaterialCardView
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_marginBottom="@dimen/card_view_interval">
-        <LinearLayout
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:orientation="vertical">
-
+                android:layout_marginBottom="@dimen/card_view_interval">
             <LinearLayout
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:orientation="horizontal">
+                    android:orientation="vertical"
+                    android:padding="@dimen/card_view_padding">
+                <RadioGroup
+                        android:id="@+id/airfield_rg"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:orientation="horizontal">
+                    <RadioButton
+                            android:id="@+id/gwangnaru_rb"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_weight="1"
+                            android:text="광나루" />
+                    <RadioButton
+                            android:id="@+id/sinjeong_rb"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_weight="1"
+                            android:text="신정" />
+                </RadioGroup>
 
-                <EditText
-                        android:id="@+id/set_fpv_band_et"
-                        android:layout_width="wrap_content"
+                <TableLayout
+                        android:id="@+id/fpv_table"
+                        android:layout_width="match_parent"
                         android:layout_height="wrap_content"
-                        android:layout_weight="1"
-                        android:inputType="number"
-                        android:hint="밴드"/>
-                <EditText
-                        android:id="@+id/set_fpv_channel_et"
-                        android:layout_width="wrap_content"
+                        android:layout_marginBottom="@dimen/card_view_interval"
+                        android:stretchColumns="*" />
+                <TextView
+                        android:id="@+id/dji_use"
+                        android:layout_width="match_parent"
                         android:layout_height="wrap_content"
-                        android:layout_weight="1"
-                        android:inputType="number"
-                        android:hint="채널"/>
-                <Button
-                        android:id="@+id/set_fpv_btn"
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:text="확인" />
+                        android:padding="@dimen/text_padding"/>
             </LinearLayout>
-            <Button
-                    android:id="@+id/use_dji_btn"
+        </com.google.android.material.card.MaterialCardView>
+
+        <com.google.android.material.card.MaterialCardView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginBottom="@dimen/card_view_interval">
+            <LinearLayout
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:text="DJI 드론 사용" />
+                    android:orientation="vertical">
+
+                <LinearLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:orientation="horizontal">
+
+                    <EditText
+                            android:id="@+id/set_fpv_band_et"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_weight="1"
+                            android:inputType="number"
+                            android:hint="밴드"/>
+                    <EditText
+                            android:id="@+id/set_fpv_channel_et"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_weight="1"
+                            android:inputType="number"
+                            android:hint="채널"/>
+                    <Button
+                            android:id="@+id/set_fpv_btn"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:text="확인" />
+                </LinearLayout>
+                <Button
+                        android:id="@+id/use_dji_btn"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:text="DJI 드론 사용" />
+            </LinearLayout>
+        </com.google.android.material.card.MaterialCardView>
+
+        <Button
+                android:id="@+id/cancel_fpv_btn"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="취소" />
+
+        <LinearLayout
+                android:id="@+id/airfield_info"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="vertical">
         </LinearLayout>
-    </com.google.android.material.card.MaterialCardView>
+    </LinearLayout>
 
-    <Button
-        android:id="@+id/cancel_fpv_btn"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:text="취소" />
-
-</LinearLayout>
+</ScrollView>

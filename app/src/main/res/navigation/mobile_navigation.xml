@@ -35,6 +35,12 @@
         tools:layout="@layout/fragment_cartoon" />
 
     <fragment
+            android:id="@+id/nav_rule2"
+            android:name="com.lalaalal.droni.ui.cartoon.Rule2Fragment"
+            android:label="드론 안전 수칙"
+            tools:layout="@layout/fragment_cartoon" />
+
+    <fragment
         android:id="@+id/nav_kp_alarm"
         android:name="com.lalaalal.droni.ui.cartoon.KpAlarmFragment"
         android:label="@string/menu_kp_alarm"

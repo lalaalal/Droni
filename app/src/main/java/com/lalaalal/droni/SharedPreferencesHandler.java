@@ -8,6 +8,7 @@ public class SharedPreferencesHandler {
     public static final String LOGIN_SESSION = "login_session";
     public static final String FPV_USING = "fpv_using";
     public static final String DJI_USING = "dji_using";
+    public static final String FIRST_USE = "fist_use";
 
     public static final String SESSION_ID = "session_id";
     public static final String FPV_BAND = "fpv_band";
@@ -107,5 +108,9 @@ public class SharedPreferencesHandler {
         if (!isLoggedIn())
             throw new LoginException(LoginException.NOT_LOGGED_IN);
         return sharedPreferences.getString(SESSION_ID, "");
+    }
+
+    public boolean isFirstUse() {
+        return sharedPreferences.getBoolean(FIRST_USE, false);
     }
 }

@@ -56,13 +56,13 @@
         android:focusable="true"
         android:clickable="true">
         <androidx.cardview.widget.CardView
+            android:id="@+id/connect_community"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_weight="1"
             android:focusable="true"
             android:clickable="true"
-            android:foreground="?attr/selectableItemBackground"
-            android:layout_marginEnd="@dimen/card_view_interval">
+            android:foreground="?attr/selectableItemBackground">
             <TextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
@@ -71,6 +71,7 @@
                 android:padding="@dimen/home_menu_padding"/>
         </androidx.cardview.widget.CardView>
         <androidx.cardview.widget.CardView
+            android:id="@+id/connect_calendar"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_weight="1"
@@ -82,7 +83,7 @@
                 android:layout_height="wrap_content"
                 android:layout_gravity="center"
                 android:padding="@dimen/home_menu_padding"
-                android:text="공지사항"/>
+                android:text="일정"/>
         </androidx.cardview.widget.CardView>
     </LinearLayout>
 
@@ -91,6 +92,7 @@
         android:layout_height="wrap_content"
         android:layout_marginBottom="@dimen/card_view_interval">
         <androidx.cardview.widget.CardView
+            android:id="@+id/rule_show"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_weight="1"
@@ -101,11 +103,12 @@
             <TextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text=" 규정  "
+                android:text="규정"
                 android:layout_gravity="center"
                 android:padding="@dimen/home_menu_padding"/>
         </androidx.cardview.widget.CardView>
         <androidx.cardview.widget.CardView
+            android:id="@+id/connect_event"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_weight="1"
@@ -120,5 +123,104 @@
                 android:text="이벤트"/>
         </androidx.cardview.widget.CardView>
     </LinearLayout>
+
+    <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"/>
+    <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:gravity="bottom"
+            android:orientation="vertical">
+
+        <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:layout_weight="1"
+                android:layout_marginBottom="@dimen/card_view_interval">
+
+            <androidx.cardview.widget.CardView
+
+                    android:id="@+id/kp_site"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="100"
+                    android:clickable="true"
+                    android:focusable="true"
+                    android:foreground="?attr/selectableItemBackground">
+
+                <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_gravity="center"
+                        android:background="#ffffff"
+                        android:padding="@dimen/home_menu_padding"
+                        android:text="실시간 KP 예보 사이트" />
+            </androidx.cardview.widget.CardView>
+
+            <androidx.cardview.widget.CardView
+                    android:id="@+id/blocked_area"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="100"
+                    android:clickable="true"
+                    android:focusable="true"
+                    android:foreground="?attr/selectableItemBackground">
+
+                <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_gravity="center"
+                        android:background="#ffffff"
+                        android:padding="@dimen/home_menu_padding"
+                        android:text="드론 비행 금지구역 정리" />
+            </androidx.cardview.widget.CardView>
+
+        </LinearLayout>
+
+        <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content">
+
+            <androidx.cardview.widget.CardView
+                    android:id="@+id/new_drone_notice"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="100"
+                    android:clickable="true"
+                    android:focusable="true"
+                    android:foreground="?attr/selectableItemBackground">
+
+                <TextView
+                        android:layout_width="198dp"
+                        android:layout_height="wrap_content"
+                        android:layout_gravity="center"
+                        android:background="#ffffff"
+                        android:padding="@dimen/home_menu_padding"
+                        android:text="새로운 드론 소식 영상" />
+            </androidx.cardview.widget.CardView>
+
+            <androidx.cardview.widget.CardView
+                    android:id="@+id/drone_video"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="100"
+                    android:clickable="true"
+                    android:focusable="true"
+                    android:foreground="?attr/selectableItemBackground">
+
+                <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_gravity="center"
+                        android:background="#ffffff"
+                        android:padding="@dimen/home_menu_padding"
+                        android:text="10월의 드론 영상" />
+            </androidx.cardview.widget.CardView>
+        </LinearLayout>
+
+    </LinearLayout>
+
+
 
 </LinearLayout>

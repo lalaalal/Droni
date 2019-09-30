@@ -4,6 +4,7 @@ import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.Toast;
 import androidx.annotation.NonNull;
 import androidx.fragment.app.Fragment;
 import com.lalaalal.droni.R;
@@ -35,10 +36,14 @@ public class IntroFragment extends Fragment {
             }
         });
 
+        Toast.makeText(getContext(), "터치해 넘겨주세요", Toast.LENGTH_SHORT).show();
+
         return root;
     }
 
     private int nextPosition() {
-        return position = (position + 1) % 4;
+        if (position < 3)
+            return position++;
+        return 3;
     }
 }

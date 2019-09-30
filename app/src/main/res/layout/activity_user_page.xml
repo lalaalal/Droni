@@ -76,4 +76,48 @@
             android:text="로그아웃"/>
 
     </LinearLayout>
+
+    <ScrollView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content" >
+        <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="vertical"
+                android:padding="@dimen/card_view_padding">
+
+            <TextView
+                    android:id="@+id/textView11"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:gravity="center"
+                    android:text="유의사항"
+                    android:textColor="@android:color/black"
+                    android:textSize="20sp" />
+
+            <TextView
+                    android:id="@+id/textView7"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:text="해당 QR코드를 드론에 스티커 형식으로 부착함으로써 드론 분실을 예방할 수 있습니다. " />
+
+            <TextView
+                    android:id="@+id/textView8"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:text="분실된 기체를 습득했을 경우, ‘스캔하기’버튼을 눌러, 해당 사용자의 이름, 전화번호, 해당 기체를 파악할 수 있습니다. 해당 사용자에게 연락 부탁드립니다. " />
+
+            <TextView
+                    android:id="@+id/textView9"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:text="QR코드를 통해 공개되는 정보는 다음과 같습니다. ‘이름, 자격증여부, 전화번호, 드론 종류’ " />
+
+            <TextView
+                    android:id="@+id/textView10"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:text="해당 QR코드를 드론에 스티커 형식으로 부착함으로써 드론 분실을 예방할 수 있습니다. " />
+        </LinearLayout>
+    </ScrollView>
 </LinearLayout>

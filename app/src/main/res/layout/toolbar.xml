@@ -35,14 +35,7 @@
                 android:src="@drawable/ic_user_black"
                 android:layout_width="@dimen/toolbar_image_width"
                 android:layout_height="@dimen/toolbar_image_height"
-                android:background="?selectableItemBackgroundBorderless"
-                android:layout_marginEnd="@dimen/toolbar_image_interval"/>
-            <ImageButton
-                android:id="@+id/setting_btn"
-                android:src="@drawable/ic_settings_black"
-                android:layout_width="@dimen/toolbar_image_width"
-                android:layout_height="@dimen/toolbar_image_height"
-                android:background="?selectableItemBackgroundBorderless" />
+                android:background="?selectableItemBackgroundBorderless"/>
         </LinearLayout>
     </LinearLayout>
 

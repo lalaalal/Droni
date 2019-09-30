@@ -19,15 +19,20 @@
             <group android:checkableBehavior="single">
                 <item
                     android:id="@+id/nav_intro"
-                    android:icon="@drawable/ic_menu_share"
+                    android:icon="@drawable/ic_pen_black"
                     android:title="@string/menu_intro" />
                 <item
                     android:id="@+id/nav_kp_alarm"
-                    android:icon="@drawable/ic_menu_send"
+                    android:icon="@drawable/ic_flag_black"
                     android:title="@string/menu_kp_alarm" />
                 <item
                     android:id="@+id/nav_rule"
+                    android:icon="@drawable/ic_block_black"
                     android:title="@string/menu_rule" />
+                <item
+                    android:id="@+id/nav_rule2"
+                    android:icon="@drawable/ic_block_black"
+                    android:title="드론 안전 수칙" />
             </group>
         </menu>
     </item>
