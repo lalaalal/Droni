@@ -29,6 +29,10 @@ public class AirFieldData {
         return fieldName;
     }
 
+    void setFieldName(String fieldName) {
+        this.fieldName = fieldName;
+    }
+
     boolean getStatusAt(int band, int channel) throws IndexOutOfBoundsException {
         if (!inRange(band, channel))
             throw new IndexOutOfBoundsException();

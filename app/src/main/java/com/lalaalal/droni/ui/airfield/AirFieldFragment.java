@@ -27,6 +27,8 @@ public class AirFieldFragment extends Fragment {
     private static final String GWANG_NARU_FIELD_NAME = "광나루";
     private static final String SIN_SEONG_FIELD_NAME = "신정";
 
+    private View root;
+
     private TableLayout fpvTableLayout;
     private RadioGroup airfieldRadioGroup;
     private RadioButton gwangNaruRadioButton;
@@ -44,7 +46,7 @@ public class AirFieldFragment extends Fragment {
 
     public View onCreateView(@NonNull LayoutInflater inflater,
                              ViewGroup container, Bundle savedInstanceState) {
-        View root = inflater.inflate(R.layout.fragment_airfield, container, false);
+        root = inflater.inflate(R.layout.fragment_airfield, container, false);
 
         sharedPreferencesHandler = SharedPreferencesHandler.getSharedPreferences(getContext());
         if (!sharedPreferencesHandler.isLoggedIn()) {
@@ -87,7 +89,7 @@ public class AirFieldFragment extends Fragment {
             useDjiDronButton.setEnabled(false);
         }
 
-        String fieldName = getSelectedAirFieldName(root);
+        String fieldName = getSelectedAirFieldName();
         loadFpvTable(fieldName);
 
         return root;
@@ -124,6 +126,7 @@ public class AirFieldFragment extends Fragment {
                         throw new DroniException("범위를 확인해 주세요");
                     setFpvStatusAt(band , channel, SUB_COMMAND_USE);
                     sharedPreferencesHandler.useFpv(band, channel);
+                    sharedPreferencesHandler.setUsingFieldName(fieldData.getFieldName());
                     loadFpvTable(fieldData.getFieldName());
                     setFpvChannelEditText.setEnabled(false);
                     setFpvBandEditText.setEnabled(false);
@@ -139,10 +142,11 @@ public class AirFieldFragment extends Fragment {
             public void onClick(View view) {
                 try {
                     setDjiDrone(SUB_COMMAND_DJI_USE);
+                    sharedPreferencesHandler.setUsingFieldName(fieldData.getFieldName());
                     sharedPreferencesHandler.useDji();
                     setFpvButton.setEnabled(false);
                     useDjiDronButton.setEnabled(false);
-                    loadFpvTable(fieldData.getFieldName());
+                    loadFpvTable(getSelectedAirFieldName());
                 } catch (DroniException e) {
                     Toast.makeText(getContext(), e.getMessage(), Toast.LENGTH_SHORT).show();
                 }
@@ -227,7 +231,6 @@ public class AirFieldFragment extends Fragment {
                 throw new DroniException(DroniException.NO_RESPONSE);
             if (response.stringData.get(0).equals("false"))
                 throw new DroniException("실패..");
-            sharedPreferencesHandler.setUsingFieldName(fieldData.getFieldName());
         } catch (InterruptedException e) {
             throw new DroniException(DroniException.CONNECTION_FAILED);
         }
@@ -248,14 +251,13 @@ public class AirFieldFragment extends Fragment {
             DroniResponse response = droniClient.getResponse();
             if (response == null)
                 throw new DroniException(DroniException.NO_RESPONSE);
-            sharedPreferencesHandler.setUsingFieldName(fieldData.getFieldName());
             Toast.makeText(getContext(), response.stringData.get(0), Toast.LENGTH_SHORT).show();
         } catch (InterruptedException e) {
             throw new DroniException(DroniException.CONNECTION_FAILED);
         }
     }
 
-    private String getSelectedAirFieldName(View root) {
+    private String getSelectedAirFieldName() {
         int selectedRadioButtonId = airfieldRadioGroup.getCheckedRadioButtonId();
         RadioButton radioButton = root.findViewById(selectedRadioButtonId);
 
