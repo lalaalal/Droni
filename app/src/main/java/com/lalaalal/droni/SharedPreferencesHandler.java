@@ -7,10 +7,12 @@ public class SharedPreferencesHandler {
     public static final String SHARED_PREF = "shared_preferences";
     public static final String LOGIN_SESSION = "login_session";
     public static final String FPV_USING = "fpv_using";
+    public static final String DJI_USING = "dji_using";
 
     public static final String SESSION_ID = "session_id";
     public static final String FPV_BAND = "fpv_band";
     public static final String FPV_CHANNEL = "fpv_channel";
+    public static final String USING_FIELD_NAME = "using_field_name";
 
     private Context context;
 
@@ -60,6 +62,33 @@ public class SharedPreferencesHandler {
             editor.putInt(FPV_CHANNEL, -1);
             editor.commit();
         }
+    }
+
+    public boolean isDjiUsing() {
+        return sharedPreferences.getBoolean(DJI_USING, false);
+    }
+
+    public void useDji() {
+        if (!isDjiUsing()) {
+            editor.putBoolean(DJI_USING, true);
+            editor.commit();
+        }
+    }
+
+    public void cancelDji() {
+        if (isDjiUsing()) {
+            editor.putBoolean(DJI_USING, false);
+            editor.commit();
+        }
+    }
+
+    public void setUsingFieldName(String fieldName) {
+        editor.putString(USING_FIELD_NAME, fieldName);
+        editor.commit();
+    }
+
+    public String getUsingFieldName() {
+        return sharedPreferences.getString(USING_FIELD_NAME, "");
     }
 
     public int getFpvBand() {

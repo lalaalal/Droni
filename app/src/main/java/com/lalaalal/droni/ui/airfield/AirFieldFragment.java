@@ -21,6 +21,11 @@ public class AirFieldFragment extends Fragment {
     private static final String SUB_COMMAND_GET = "GET";
     private static final String SUB_COMMAND_USE = "SET_USE";
     private static final String SUB_COMMAND_NOT_USE = "SET_NOT_USE";
+    private static final String SUB_COMMAND_DJI_USE = "SET_DJI_USE";
+    private static final String SUB_COMMAND_DJI_NOT_USE = "SET_DJI_NOT_USE";
+
+    private static final String GWANG_NARU_FIELD_NAME = "광나루";
+    private static final String SIN_SEONG_FIELD_NAME = "신정";
 
     private TableLayout fpvTableLayout;
     private RadioGroup airfieldRadioGroup;
@@ -30,6 +35,8 @@ public class AirFieldFragment extends Fragment {
     private EditText setFpvChannelEditText;
     private Button setFpvButton;
     private Button cancelFpvButton;
+    private Button useDjiDronButton;
+    private TextView djiDroneUsingTextView;
 
     private AirFieldData fieldData;
 
@@ -53,10 +60,13 @@ public class AirFieldFragment extends Fragment {
 
         gwangNaruRadioButton.setChecked(true);
 
+        djiDroneUsingTextView = root.findViewById(R.id.dji_use);
+
         setFpvBandEditText = root.findViewById(R.id.set_fpv_band_et);
         setFpvChannelEditText = root.findViewById(R.id.set_fpv_channel_et);
         setFpvButton = root.findViewById(R.id.set_fpv_btn);
         cancelFpvButton = root.findViewById(R.id.cancel_fpv_btn);
+        useDjiDronButton = root.findViewById(R.id.use_dji_btn);
 
         initFpvTableLayout();
         setRadioButtonsOnClickListener();
@@ -71,6 +81,10 @@ public class AirFieldFragment extends Fragment {
             setFpvChannelEditText.setText(channel);
             setFpvChannelEditText.setEnabled(false);
             setFpvButton.setEnabled(false);
+        }
+        if (sharedPreferencesHandler.isDjiUsing()) {
+            setFpvButton.setEnabled(false);
+            useDjiDronButton.setEnabled(false);
         }
 
         String fieldName = getSelectedAirFieldName(root);
@@ -120,22 +134,47 @@ public class AirFieldFragment extends Fragment {
             }
         });
 
+        useDjiDronButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                try {
+                    setDjiDrone(SUB_COMMAND_DJI_USE);
+                    sharedPreferencesHandler.useDji();
+                    setFpvButton.setEnabled(false);
+                    useDjiDronButton.setEnabled(false);
+                    loadFpvTable(fieldData.getFieldName());
+                } catch (DroniException e) {
+                    Toast.makeText(getContext(), e.getMessage(), Toast.LENGTH_SHORT).show();
+                }
+            }
+        });
+
         cancelFpvButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 try {
-                    if (!sharedPreferencesHandler.isFpvUsing())
+                    String s = sharedPreferencesHandler.getUsingFieldName();
+                    if (!sharedPreferencesHandler.isFpvUsing() && !sharedPreferencesHandler.isDjiUsing())
                         throw new DroniException("사용 중인 대역폭이 없습니다");
+                    if (!sharedPreferencesHandler.getUsingFieldName().equals(fieldData.getFieldName()))
+                        throw new DroniException("다른 비행장 입니다");
                     if (!sharedPreferencesHandler.isLoggedIn())
                         throw new DroniException("로그인을 해 주세요");
-                    int band = sharedPreferencesHandler.getFpvBand();
-                    int channel = sharedPreferencesHandler.getFpvChannel();
-                    setFpvStatusAt(band , channel, SUB_COMMAND_NOT_USE);
-                    sharedPreferencesHandler.cancelFpv();
+                    if (sharedPreferencesHandler.isDjiUsing()) {
+                        setDjiDrone(SUB_COMMAND_DJI_NOT_USE);
+                        sharedPreferencesHandler.cancelDji();
+                        setFpvButton.setEnabled(true);
+                        useDjiDronButton.setEnabled(true);
+                    } else {
+                        int band = sharedPreferencesHandler.getFpvBand();
+                        int channel = sharedPreferencesHandler.getFpvChannel();
+                        setFpvStatusAt(band , channel, SUB_COMMAND_NOT_USE);
+                        sharedPreferencesHandler.cancelFpv();
+                        setFpvChannelEditText.setEnabled(true);
+                        setFpvBandEditText.setEnabled(true);
+                        setFpvButton.setEnabled(true);
+                    }
                     loadFpvTable(fieldData.getFieldName());
-                    setFpvChannelEditText.setEnabled(true);
-                    setFpvBandEditText.setEnabled(true);
-                    setFpvButton.setEnabled(true);
                 } catch (DroniException e) {
                     Toast.makeText(getContext(), e.getMessage(), Toast.LENGTH_SHORT).show();
                 }
@@ -174,6 +213,26 @@ public class AirFieldFragment extends Fragment {
         }
     }
 
+    private void setDjiDrone(String setCommand) throws DroniException {
+        try {
+            String stringData = setCommand + ":" + fieldData.getFieldName();
+            DroniRequest request = new DroniRequest(DroniRequest.TYPE_FILE, COMMAND_AIRFIELD, stringData);
+            DroniClient droniClient = new DroniClient(request);
+            Thread thread = new Thread(droniClient);
+            thread.start();
+            thread.join();
+
+            DroniResponse response = droniClient.getResponse();
+            if (response == null)
+                throw new DroniException(DroniException.NO_RESPONSE);
+            if (response.stringData.get(0).equals("false"))
+                throw new DroniException("실패..");
+            sharedPreferencesHandler.setUsingFieldName(fieldData.getFieldName());
+        } catch (InterruptedException e) {
+            throw new DroniException(DroniException.CONNECTION_FAILED);
+        }
+    }
+
     private void setFpvStatusAt(int band, int channel, String setCommand) throws DroniException {
         if (setCommand.equals(SUB_COMMAND_USE) && fieldData.getStatusAt(band, channel))
             throw new DroniException("이미 사용중 입니다");
@@ -189,6 +248,7 @@ public class AirFieldFragment extends Fragment {
             DroniResponse response = droniClient.getResponse();
             if (response == null)
                 throw new DroniException(DroniException.NO_RESPONSE);
+            sharedPreferencesHandler.setUsingFieldName(fieldData.getFieldName());
             Toast.makeText(getContext(), response.stringData.get(0), Toast.LENGTH_SHORT).show();
         } catch (InterruptedException e) {
             throw new DroniException(DroniException.CONNECTION_FAILED);
@@ -219,6 +279,8 @@ public class AirFieldFragment extends Fragment {
                     }
                 }
             }
+            String s = "DJI : " + fieldData.getDjiDrone();
+            djiDroneUsingTextView.setText(s);
         } catch (DroniException e) {
             Toast.makeText(getContext(), e.getMessage(), Toast.LENGTH_SHORT).show();
         }

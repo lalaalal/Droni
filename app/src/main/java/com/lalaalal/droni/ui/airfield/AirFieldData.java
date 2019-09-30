@@ -5,9 +5,11 @@ import java.util.ArrayList;
 public class AirFieldData {
     static final int CHANNEL_NUM = 8;
     static final int BAND_NUM = 5;
+    static final int DJI_DRONE_NUM_INDEX = 40;
 
     private String fieldName;
     private boolean[][] fpvTable;
+    private int djiDrone;
 
     AirFieldData(String fieldName, ArrayList<String> fpvStringData) {
         this.fieldName = fieldName;
@@ -19,6 +21,8 @@ public class AirFieldData {
                 fpvTable[band][channel] = fpv;
             }
         }
+
+        djiDrone = Integer.parseInt(fpvStringData.get(DJI_DRONE_NUM_INDEX));
     }
 
     String getFieldName() {
@@ -30,6 +34,10 @@ public class AirFieldData {
             throw new IndexOutOfBoundsException();
 
         return fpvTable[band][channel];
+    }
+
+    int getDjiDrone() {
+        return djiDrone;
     }
 
     static boolean inRange(int band, int channel) {

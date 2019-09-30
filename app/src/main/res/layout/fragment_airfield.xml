@@ -37,7 +37,13 @@
                 android:id="@+id/fpv_table"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
+                android:layout_marginBottom="@dimen/card_view_interval"
                 android:stretchColumns="*" />
+            <TextView
+                    android:id="@+id/dji_use"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:padding="@dimen/text_padding"/>
         </LinearLayout>
     </com.google.android.material.card.MaterialCardView>
 
@@ -46,29 +52,40 @@
         android:layout_height="wrap_content"
         android:layout_marginBottom="@dimen/card_view_interval">
         <LinearLayout
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:orientation="horizontal">
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="vertical">
 
-            <EditText
-                android:id="@+id/set_fpv_band_et"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_weight="1"
-                android:inputType="number"
-                android:hint="밴드"/>
-            <EditText
-                android:id="@+id/set_fpv_channel_et"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_weight="1"
-                android:inputType="number"
-                android:hint="채널"/>
+            <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:orientation="horizontal">
+
+                <EditText
+                        android:id="@+id/set_fpv_band_et"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_weight="1"
+                        android:inputType="number"
+                        android:hint="밴드"/>
+                <EditText
+                        android:id="@+id/set_fpv_channel_et"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_weight="1"
+                        android:inputType="number"
+                        android:hint="채널"/>
+                <Button
+                        android:id="@+id/set_fpv_btn"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="확인" />
+            </LinearLayout>
             <Button
-                android:id="@+id/set_fpv_btn"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:text="확인" />
+                    android:id="@+id/use_dji_btn"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:text="DJI 드론 사용" />
         </LinearLayout>
     </com.google.android.material.card.MaterialCardView>
 
