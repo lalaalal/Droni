@@ -78,14 +78,13 @@ public class AirFieldFragment extends Fragment {
             String band = Integer.toString(sharedPreferencesHandler.getFpvBand());
             String channel = Integer.toString(sharedPreferencesHandler.getFpvChannel());
 
-            setFpvBandEditText.setText(band);
+            setFpvBandEditText.setText(band + 1);
             setFpvBandEditText.setEnabled(false);
-            setFpvChannelEditText.setText(channel);
+            setFpvChannelEditText.setText(channel + 1);
             setFpvChannelEditText.setEnabled(false);
             setFpvButton.setEnabled(false);
         }
         if (sharedPreferencesHandler.isDjiUsing()) {
-            setFpvButton.setEnabled(false);
             useDjiDronButton.setEnabled(false);
         }
 
@@ -144,7 +143,6 @@ public class AirFieldFragment extends Fragment {
                     setDjiDrone(SUB_COMMAND_DJI_USE);
                     sharedPreferencesHandler.setUsingFieldName(fieldData.getFieldName());
                     sharedPreferencesHandler.useDji();
-                    setFpvButton.setEnabled(false);
                     useDjiDronButton.setEnabled(false);
                     loadFpvTable(getSelectedAirFieldName());
                 } catch (DroniException e) {
@@ -167,7 +165,6 @@ public class AirFieldFragment extends Fragment {
                     if (sharedPreferencesHandler.isDjiUsing()) {
                         setDjiDrone(SUB_COMMAND_DJI_NOT_USE);
                         sharedPreferencesHandler.cancelDji();
-                        setFpvButton.setEnabled(true);
                         useDjiDronButton.setEnabled(true);
                     } else {
                         int band = sharedPreferencesHandler.getFpvBand();
